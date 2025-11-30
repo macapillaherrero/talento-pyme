@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Infografía FP Dual y Talento PYME</title>
+<style>
+  :root {
+    --color-principal: #59c3c7;   /* adapta al color del logo */
+    --color-oscuro: #005f73;
+    --color-fondo: #f5fbfc;
+    --color-tarjeta: #ffffff;
+  }
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    padding: 20px;
+    font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+    background: var(--color-fondo);
+    color: #222;
+  }
+
+  .infografia {
+    max-width: 1100px;
+    margin: 0 auto;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    overflow: hidden;
+  }
+
+  /* CABECERA */
+  .header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 30px;
+    background: linear-gradient(120deg, var(--color-principal), #8fd4d7);
+    color: #ffffff;
+  }
+  .logos {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .logos img {
+    max-height: 60px;
+  }
+  .titulo {
+    text-align: right;
+  }
+  .titulo h1 {
+    margin: 0;
+    font-size: 1.9rem;
+    font-weight: 700;
+  }
+  .titulo p {
+    margin: 4px 0 0;
+    font-size: 0.95rem;
+    opacity: 0.9;
+  }
+
+  /* CONTENIDO */
+  .contenido {
+    padding: 30px;
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1.4fr);
+    gap: 25px;
+  }
+  @media (max-width: 900px) {
+    .contenido { grid-template-columns: 1fr; }
+    .titulo { text-align: left; margin-top: 15px; }
+  }
+
+  h2 {
+    margin-top: 0;
+    color: var(--color-oscuro);
+    font-size: 1.35rem;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: rgba(89,195,199,0.12);
+    color: var(--color-oscuro);
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 6px;
+  }
+
+  .tarjetas {
+    display: grid;
+    gap: 12px;
+  }
+  .tarjeta {
+    display: grid;
+    grid-template-columns: 52px minmax(0, 1fr);
+    gap: 12px;
+    padding: 14px 16px;
+    background: var(--color-tarjeta);
+    border-radius: 12px;
+    border: 1px solid rgba(0,0,0,0.04);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.03);
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+  .tarjeta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  }
+  .tarjeta-icono {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    background: rgba(89,195,199,0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    color: var(--color-oscuro);
+  }
+  .tarjeta h3 {
+    margin: 0 0 4px;
+    font-size: 1rem;
+    color: var(--color-oscuro);
+  }
+  .tarjeta p {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.35;
+  }
+
+  /* COLUMNA DERECHA: TALENTO PYME + BENEFICIOS */
+  .bloque {
+    margin-bottom: 25px;
+    padding: 18px 18px 16px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba(89,195,199,0.09), #ffffff);
+    border: 1px solid rgba(0,0,0,0.04);
+  }
+  .bloque ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 8px 0 0;
+  }
+  .bloque li {
+    position: relative;
+    margin-bottom: 6px;
+    padding-left: 18px;
+    font-size: 0.9rem;
+  }
+  .bloque li::before {
+    content: "▹";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--color-oscuro);
+  }
+
+  /* LÍNEA DE TIEMPO FCT -> FP DUAL */
+  .timeline {
+    margin-top: 18px;
+    padding: 14px 14px 10px;
+    border-radius: 12px;
+    background: #f0fbfc;
+    font-size: 0.85rem;
+  }
+  .timeline-flex {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    margin-top: 8px;
+  }
+  .pill {
+    flex: 1;
+    padding: 8px 10px;
+    border-radius: 999px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.85rem;
+  }
+  .pill-old {
+    background: #ffffff;
+    border: 1px dashed #888;
+    color: #555;
+  }
+  .pill-arrow {
+    flex: 0 0 auto;
+    font-size: 1.4rem;
+    color: var(--color-oscuro);
+  }
+  .pill-new {
+    background: var(--color-principal);
+    color: #ffffff;
+  }
+
+  /* FOOTER */
+  .footer {
+    padding: 10px 22px 16px;
+    font-size: 0.78rem;
+    color: #666;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    border-top: 1px solid rgba(0,0,0,0.05);
+  }
+</style>
+</head>
+<body>
+
+<div class="infografia" id="infografia-fp">
+
+  <!-- CABECERA CON LOGOS -->
+  <header class="header">
+    <div class="logos">
+      <img src="https://macapillaherrero.github.io/DWES/logos/camp.png" style="height:64px;margin-right:32px" alt="Logo del centro" />
+      <img src="https://macapillaherrero.github.io/DWES/logos/Talent_PYME-Marca_2_colores.pdf"  style="height:64px;margin-right:32px" alt="Logo Talento PYME" />
+    </div>
+    <div class="titulo">
+      <h1>FP Dual y Talento PYME</h1>
+      <p>Nueva Ley de Formación Profesional · Guía visual para empresas colaboradoras</p>
+    </div>
+  </header>
+
+  <!-- CUERPO -->
+  <div class="contenido">
+    <!-- COLUMNA IZQUIERDA -->
+    <section>
+      <div class="badge">Qué cambia con la nueva Ley FP</div>
+      <h2>Claves para la formación en empresa</h2>
+
+      <div class="tarjetas">
+        <article class="tarjeta">
+          <div class="tarjeta-icono">⚖️</div>
+          <div>
+            <h3>FP Dual obligatoria en todos los ciclos</h3>
+            <p>Toda la FP pasa a ser dual: el alumnado combina formación en el centro con formación en empresa como parte obligatoria del currículo.</p>
+          </div>
+        </article>
+
+        <article class="tarjeta">
+          <div class="tarjeta-icono">🏭</div>
+          <div>
+            <h3>Formación en empresa entre el 20‑35% del tiempo</h3>
+            <p>La antigua FCT desaparece como módulo aislado. La formación práctica se integra en el ciclo, con un mínimo de entre el 20‑35% del tiempo total en la empresa.</p>
+          </div>
+        </article>
+
+        <article class="tarjeta">
+          <div class="tarjeta-icono">🧩</div>
+          <div>
+            <h3>Corresponsabilidad activa de la empresa</h3>
+            <p>Las empresas participan en el diseño del plan formativo, tutorizan al alumnado y colaboran en su evaluación, compartiendo la responsabilidad con el centro educativo.</p>
+          </div>
+        </article>
+
+        <article class="tarjeta">
+          <div class="tarjeta-icono">🔄</div>
+          <div>
+            <h3>Sistema modular, flexible y acreditable</h3>
+            <p>La FP se organiza en módulos y microformaciones basadas en competencias, lo que facilita la actualización y acreditación progresiva a lo largo de la vida profesional.</p>
+          </div>
+        </article>
+
+        <article class="tarjeta">
+          <div class="tarjeta-icono">🌐</div>
+          <div>
+            <h3>Digitalización, sostenibilidad y emprendimiento</h3>
+            <p>Los nuevos currículos incorporan contenidos de digitalización, economía verde y emprendimiento, conectando la FP con los sectores emergentes y las necesidades reales del mercado.</p>
+          </div>
+        </article>
+      </div>
+
+      <!-- Línea de tiempo visual FCT -> Dual -->
+      <div class="timeline">
+        <strong>De la FCT tradicional a una FP Dual completa</strong>
+        <div class="timeline-flex">
+          <div class="pill pill-old">Módulo FCT aislado</div>
+          <div class="pill-arrow">➜</div>
+          <div class="pill pill-new">Formación en empresa integrada en todo el ciclo</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COLUMNA DERECHA -->
+    <aside>
+      <div class="bloque">
+        <div class="badge">Talento PYME</div>
+        <h2>Conectando FP y tejido empresarial</h2>
+        <ul>
+          <li>Programa de la Generalitat Valenciana que acerca los ciclos de FP a las PYMES del entorno.</li>
+          <li>Favorece convenios, proyectos conjuntos y participación de las empresas en la formación del alumnado.</li>
+          <li>Ayuda a detectar perfiles profesionales ajustados a las necesidades reales de cada sector.</li>
+        </ul>
+      </div>
+
+      <div class="bloque">
+        <div class="badge">¿Qué gana tu empresa?</div>
+        <h2>Beneficios de colaborar</h2>
+        <ul>
+          <li>Acceso a talento joven que aprende con vuestros procesos, herramientas y cultura de trabajo.</li>
+          <li>Participación directa en el diseño de la formación práctica para ajustarla al puesto real.</li>
+          <li>Posibilidad de incorporar a futuro a personas ya formadas en vuestras metodologías.</li>
+          <li>Refuerzo de la responsabilidad social y de la imagen de empresa comprometida con la FP.</li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+
+  <div class="footer">
+    <span>Basado en la Ley Orgánica 3/2022 de Ordenación e Integración de la Formación Profesional.</span>
+    <span>Centro educativo y programa Talento PYME – Colaboración con empresas.</span>
+  </div>
+
+</div>
+
+<script>
+  // Pequeño efecto JS: elevar suavemente la infografía al cargar.
+  const card = document.getElementById('infografia-fp');
+  card.style.transform = 'translateY(10px)';
+  card.style.opacity = '0';
+  window.addEventListener('load', () => {
+    card.style.transition = 'all 0.6s ease';
+    card.style.transform = 'translateY(0)';
+    card.style.opacity = '1';
+  });
+</script>
+
+</body>
+</html>
