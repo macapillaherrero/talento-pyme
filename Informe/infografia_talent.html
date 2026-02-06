@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informe Talent Pyme 25/26 - Master</title>
+    <style>
+        :root { --primary: #2c3e50; --accent: #3498db; --danger: #e74c3c; --warning: #f1c40f; --success: #27ae60; --bg: #f4f7f6; --corp: #8e44ad; --collab: #d35400; }
+        body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); margin: 0; padding: 20px; color: #333; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        
+        /* Header */
+        header { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); text-align: center; margin-bottom: 30px; }
+        h1 { margin: 0; color: var(--primary); text-transform: uppercase; letter-spacing: 1px; }
+        .subtitle { color: #7f8c8d; margin-top: 10px; font-weight: 300; }
+
+        /* Tabs Navigation */
+        .tabs { display: flex; gap: 10px; margin-bottom: 20px; justify-content: center; flex-wrap: wrap; }
+        .tab-btn { background: white; border: none; padding: 12px 25px; border-radius: 30px; cursor: pointer; font-weight: 600; color: #7f8c8d; transition: all 0.3s; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .tab-btn.active { background: var(--accent); color: white; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3); }
+        .tab-btn:hover:not(.active) { background: #e8e8e8; }
+
+        /* Tab Content */
+        .tab-content { display: none; animation: fadeIn 0.5s; }
+        .tab-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Cards Layout */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px; }
+        .card { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.03); border-top: 4px solid transparent; }
+        .card.danger { border-color: var(--danger); }
+        .card.warning { border-color: var(--warning); }
+        .card.success { border-color: var(--success); }
+        .card.info { border-color: var(--accent); }
+        .card.corp { border-color: var(--corp); }
+        .card.collab { border-color: var(--collab); }
+
+        h3 { margin-top: 0; display: flex; align-items: center; gap: 10px; font-size: 1.2rem; }
+        ul { padding-left: 20px; line-height: 1.6; }
+        li { margin-bottom: 8px; }
+
+        /* Specific Visuals */
+        .verbatim { font-style: italic; background: #fffbe6; padding: 10px; border-left: 3px solid var(--warning); border-radius: 4px; font-size: 0.9em; color: #555; margin-top: 10px; }
+        .stat-row { display: flex; justify-content: space-between; margin-bottom: 5px; font-size: 0.9em; }
+        .progress-bar { height: 8px; background: #eee; border-radius: 4px; overflow: hidden; margin-bottom: 15px; }
+        .progress-fill { height: 100%; background: var(--accent); }
+        
+        .tag-container { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 5px; }
+        .tag { background: #eee; padding: 3px 8px; border-radius: 4px; font-size: 0.8em; color: #555; }
+        .tag.tech { background: #e8f6f3; color: #16a085; font-weight: bold; }
+        
+        .challenge-box { background: #fdf2e9; border: 1px dashed #d35400; padding: 15px; border-radius: 8px; margin-top: 10px; }
+        .challenge-title { font-weight: bold; color: #d35400; display: block; margin-bottom: 5px; }
+
+    </style>
+    <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true, theme: 'base', themeVariables: { primaryColor: '#ecf0f1', edgeLabelBackground:'#ffffff', tertiaryColor: '#fff' } });
+    </script>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Análisis Talent Pyme 2025/26</h1>
+        <div class="subtitle">Conclusiones detalladas por Ciclo, Empresas y Retos | IES Camp de Morvedre</div>
+    </header>
+
+    <div class="tabs">
+        <button class="tab-btn active" onclick="openTab(event, 'general')">Vista General</button>
+        <button class="tab-btn" onclick="openTab(event, 'fpb')">FP Básica</button>
+        <button class="tab-btn" onclick="openTab(event, 'smr')">Grado Medio (SMR)</button>
+        <button class="tab-btn" onclick="openTab(event, 'superior')">Grado Superior (ASIR/DAW/DAM)</button>
+        <button class="tab-btn" onclick="openTab(event, 'empresas')">🏢 Empresas Partner</button>
+        <button class="tab-btn" onclick="openTab(event, 'proyectos')">🤝 Proyectos & Retos</button>
+    </div>
+
+    <div id="general" class="tab-content active">
+        
+        <div class="card" style="margin-bottom: 20px; border-top: 4px solid #8e44ad;">
+            <h3>🗺️ Mapa del Cambio: De la Carencia al Talento</h3>
+            <p>La hoja de ruta estratégica derivada del análisis Talent Pyme:</p>
+            
+            <div class="mermaid" style="text-align: center;">
+            graph TD
+                subgraph DIAGNÓSTICO_ACTUAL [Situación Actual]
+                    A[Alumnado: Inmadurez]:::alert
+                    B[Debilidad: Comunicación]:::alert
+                    C[Carencia: Visión Negocio]:::alert
+                end
+
+                subgraph EL_PUENTE [Solución Metodológica]
+                    D(Retos Reales / ABP):::neutral
+                    E(Empresa en el Aula):::neutral
+                    F(IA Ética Transversal):::neutral
+                end
+
+                subgraph OBJETIVO [Perfil 2026]
+                    G[Actitud Proactiva]:::success
+                    H[Hard Skills: Cloud/Docker]:::success
+                    I[Adaptabilidad]:::success
+                end
+
+                A --> D
+                B --> D
+                C --> E
+                D --> G
+                E --> H
+                F --> I
+
+                classDef alert fill:#fadbd8,stroke:#e74c3c,stroke-width:2px;
+                classDef neutral fill:#ebf5fb,stroke:#3498db,stroke-width:2px;
+                classDef success fill:#d5f5e3,stroke:#27ae60,stroke-width:2px;
+            </div>
+        </div>
+
+        <div class="grid">
+            <div class="card danger">
+                <h3>🚨 Top 3 Carencias Transversales</h3>
+                <ul>
+                    <li><b>Actitud > Aptitud:</b> La falta de proactividad es la queja número 1 en todos los niveles.</li>
+                    <li><b>Comprensión Lectora:</b> Grave en GM. Los alumnos no leen la documentación.</li>
+                    <li><b>Visión de Negocio:</b> Desconocimiento de costes, tiempos y trato con cliente.</li>
+                </ul>
+            </div>
+            <div class="card info">
+                <h3>☁️ Tecnologías "Must Have"</h3>
+                <div class="stat-row"><span>IA & Ética</span> <span>Muy Alta</span></div>
+                <div class="progress-bar"><div class="progress-fill" style="width: 95%"></div></div>
+                
+                <div class="stat-row"><span>Cloud (Azure/AWS)</span> <span>Alta</span></div>
+                <div class="progress-bar"><div class="progress-fill" style="width: 85%"></div></div>
+                
+                <div class="stat-row"><span>Contenedores (Docker)</span> <span>Alta (Superior)</span></div>
+                <div class="progress-bar"><div class="progress-fill" style="width: 75%"></div></div>
+            </div>
+        </div>
+        
+        <div style="margin-top:20px; text-align:center; padding:20px; background:white; border-radius:10px;">
+            <img src="carencias_niveles.png" alt="Gráfico de Carencias" style="max-width:100%; margin-top:10px;">
+        </div>
+    </div>
+
+    <div id="fpb" class="tab-content">
+        <div class="grid">
+            <div class="card danger">
+                <h3>⚠️ El Problema Crítico: Seguridad</h3>
+                <p>La frase más repetida en los informes de FPB es:</p>
+                <div class="verbatim">"Falta de autonomía cumpliendo normas de seguridad"</div>
+                <p>También se destaca la falta de cuidado con materiales y limpieza.</p>
+            </div>
+            <div class="card success">
+                <h3>💡 Oportunidad: Oratoria</h3>
+                <p>Sorprendentemente, se valora con <b>15 puntos</b> (sobre 5) la capacidad de comunicarse y exponer.</p>
+                <ul>
+                    <li>Ampliar vocabulario técnico.</li>
+                    <li>Saber explicar qué han hecho.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="smr" class="tab-content">
+        <div class="grid">
+            <div class="card warning">
+                <h3>📚 "No leen, no tienen paciencia"</h3>
+                <p>El diagnóstico en Grado Medio es duro respecto a las capacidades básicas:</p>
+                <ul>
+                    <li>Falta comprensión lectora de manuales.</li>
+                    <li>Falta capacidad de redacción de informes técnicos.</li>
+                    <li>Inmadurez y falta de seriedad en el trabajo.</li>
+                </ul>
+            </div>
+            <div class="card info">
+                <h3>🔧 El Nuevo "MacGyver" (Hard Skills)</h3>
+                <ul>
+                    <li><b>Psicomotricidad Fina (5/5):</b> Reparación de móviles y tablets, no solo PCs.</li>
+                    <li><b>Documentación (5/5):</b> Saber registrar el trabajo realizado.</li>
+                    <li><b>Cloud Híbrida:</b> Copias de seguridad en la nube.</li>
+                </ul>
+            </div>
+        </div>
+        <div style="margin-top:20px; text-align:center; padding:20px; background:white; border-radius:10px;">
+            <img src="radar_smr.png" alt="Radar SMR" style="max-width:100%; margin-top:10px;">
+        </div>
+    </div>
+
+    <div id="superior" class="tab-content">
+        <div class="grid">
+            <div class="card danger">
+                <h3>🚫 El Agujero: Despliegue</h3>
+                <p>En DAW/DAM saben programar, pero no poner en producción.</p>
+                <div class="verbatim">"No se ve el módulo de despliegue... Desconocimiento de planes de seguridad."</div>
+                <ul>
+                    <li>Falta <b>Docker</b> y entornos de pruebas.</li>
+                    <li>Falta verificar que el proceso ha terminado bien (ASIR).</li>
+                </ul>
+            </div>
+            <div class="card info">
+                <h3>💻 Demandas Específicas</h3>
+                <ul>
+                    <li><b>ASIR:</b> Abrirse a Windows Server (no solo Linux) y Tuning de SO.</li>
+                    <li><b>DAM:</b> Ecosistema Apple (iOS) y falta de recursos para ello.</li>
+                    <li><b>DAW:</b> Diseño y Usabilidad (no es el perfil, pero se pide).</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="empresas" class="tab-content">
+        <div class="grid" style="margin-bottom:20px;">
+             <div class="card">
+                <h3>📊 Distribución de Plazas</h3>
+                <img src="plazas_empresas.png" alt="Plazas Empresas" style="width:100%; border-radius:8px;">
+            </div>
+            <div class="card">
+                <h3>🛠️ Nube de Tareas Reales</h3>
+                <img src="nube_tareas_fct.png" alt="Tareas Reales" style="width:100%; border-radius:8px;">
+            </div>
+        </div>
+
+        <div class="grid">
+            <div class="card corp" style="background:#f4ecf7;">
+                <h3>🏭 Schneider Electric</h3>
+                <div class="stat-row"><b>Plazas: 49</b> <span>Multiperfil</span></div>
+                <div class="tag-container"><span class="tag">Mantenimiento</span><span class="tag tech">Data</span></div>
+            </div>
+            <div class="card info">
+                <h3>💻 Consultoría Cloud & Data</h3>
+                <ul>
+                    <li><b>Aleson ITC:</b> Admin Cloud, Dashboards.</li>
+                    <li><b>Teayudo.info:</b> SharePoint, Moodle.</li>
+                </ul>
+            </div>
+             <div class="card warning">
+                <h3>🔧 Soporte y Redes</h3>
+                <ul>
+                    <li><b>Hosp. Sagunto:</b> CAU, VLANs.</li>
+                    <li><b>Servinco / Altosa:</b> Mantenimiento.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="proyectos" class="tab-content">
+        
+        <div style="margin-bottom:20px; text-align:center; padding:20px; background:white; border-radius:10px; box-shadow: 0 4px 6px rgba(0,0,0,0.03);">
+            <img src="tipologia_proyectos.png" alt="Tipología de Proyectos" style="max-width:100%;">
+        </div>
+
+        <div class="grid">
+            <div class="card collab">
+                <h3>🚀 Retos Reales (Empresa → Aula)</h3>
+                <p>Las empresas proponen desafíos concretos para resolver en clase:</p>
+                
+                <div class="challenge-box">
+                    <span class="challenge-title">Digitalización Low-Cost (Schneider)</span>
+                    Digitalizar una empresa subcontratada sin acceso a la red principal. Analizar ROI.
+                </div>
+                
+                <div class="challenge-box">
+                    <span class="challenge-title">CPD en Espejo (IES María Enríquez)</span>
+                    Montar un Centro de Procesamiento de Datos replicado idéntico al de una empresa real.
+                </div>
+
+                <div class="challenge-box">
+                    <span class="challenge-title">Junior Empresa ERP (Camp)</span>
+                    Desarrollar un ERP ad-hoc para una empresa real mediante una "Junior Empresa" de alumnos.
+                </div>
+            </div>
+
+            <div class="card info">
+                <h3>🤝 Nuevas Formas de Colaborar</h3>
+                <ul>
+                    <li><b>Job Shadowing:</b> Profesores que van a la empresa a "mirar y aprender" (solicitado en DAM).</li>
+                    <li><b>Continuidad 1º-2º:</b> (Aleson ITC) Que el proyecto de prácticas de 1º se continúe en 2º curso.</li>
+                    <li><b>Coordinador Dedicado:</b> (Mestre Ramon Esteve) Una figura exclusiva para gestionar la relación centro-empresa.</li>
+                </ul>
+
+                <h4 style="margin-top:20px; border-bottom:1px solid #eee; padding-bottom:5px;">📦 Necesidades Materiales</h4>
+                <ul>
+                    <li>Laboratorio de redes y servidores actualizado.</li>
+                    <li>Material para talleres de montaje y reparación (hardware moderno).</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    function openTab(evt, tabName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tab-content");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+            tabcontent[i].classList.remove("active");
+        }
+        tablinks = document.getElementsByClassName("tab-btn");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(tabName).style.display = "block";
+        document.getElementById(tabName).classList.add("active");
+        evt.currentTarget.className += " active";
+    }
+</script>
+
+</body>
+</html>
